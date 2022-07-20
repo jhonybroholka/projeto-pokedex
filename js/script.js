@@ -1,3 +1,4 @@
+/*-----DOM MANIPULATION START-----*/
 const pokemonName = document.querySelector('.pokemon-name');
 
 const pokemonNumber = document.querySelector('.pokemon-number');
@@ -10,9 +11,13 @@ const input = document.querySelector('.input-search');
 
 const buttonPrev = document.querySelector('.btn-prev');
 const buttonNext = document.querySelector('.btn-next');
+/*-----DOM MANIPULATION END-----*/
 
+/*-----SET A POKEMON AS DEFAULT START-----*/
 let searchPokemon = 1;
+/*-----SET A POKEMON AS DEFAULT END-----*/
 
+/*-----API FETCH DATA START-----*/
 const fetchPokemon = async (pokemon) => {
     const APIResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
 
@@ -21,7 +26,9 @@ const fetchPokemon = async (pokemon) => {
         return data
     }
 }
+/*-----API FETCH DATA END-----*/
 
+/*-----RENDER POKEMON IN SCREEN START-----*/
 const renderPokemon = async (pokemon) => {
     
     pokemonName.innerHTML = 'Loading...';
@@ -45,13 +52,17 @@ const renderPokemon = async (pokemon) => {
 
     
 };
+/*-----RENDER POKEMON IN SCREEN END-----*/
 
+/*-----SEARCH BAR FUNCTIONAL START-----*/
 form.addEventListener('submit', (event) => {
 
     event.preventDefault();
     renderPokemon(input.value.toLowerCase());
 });
+/*-----SEARCH BAR FUNCTIONAL END-----*/
 
+/*-----BUTTONS FUNCTIONAL START-----*/
 buttonPrev.addEventListener('click', () => {
     if(searchPokemon > 1){
         searchPokemon -= 1;
@@ -64,5 +75,7 @@ buttonNext.addEventListener('click', () => {
     searchPokemon += 1;
     renderPokemon(searchPokemon);
 });
+/*-----BUTTONS FUNCTIONAL END-----*/
 
+/*-----CALL A POKEMON AS DEFAULT-----*/
 renderPokemon(searchPokemon);
